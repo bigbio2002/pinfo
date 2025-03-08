@@ -53,7 +53,7 @@ dnl	CFLAGS=${CFLAGS--O}
 	AC_SUBST(READLINE_INCLUDES)
 
 	AC_ARG_WITH(readline,
-	  [  --with-readline[=dir]     Compile with readline/locate base dir [no compile]],
+	  [AS_HELP_STRING([--with-readline[=dir]], [Compile with readline/locate base dir [no compile]])],
 	  if test "x$withval" = "xno" ; then
 		search_readline=false
 	  elif test "x$withval" != "xyes" ; then
@@ -100,7 +100,7 @@ AC_DEFUN([AC_READLINE], [
 ])
 
 AC_DEFUN([AC_SEARCH_READLINE], [
-    AC_CHECKING(location of readline.h file)
+    AC_MSG_NOTICE(location of readline.h file)
 
     AC_READLINE(/usr/include, readline.h, -lreadline,, "readline on /usr/include")
     AC_READLINE(/usr/include/readline, readline.h, -lreadline, -I/usr/include/readline, "readline on /usr/include/readline")
@@ -118,7 +118,7 @@ cat > conftest.$ac_ext <<EOF
 #undef VERSION
 VERSION:RL_VERSION_MAJOR.RL_VERSION_MINOR
 EOF
-	if (eval "$ac_cpp $READLINE_INCLUDES conftest.$ac_ext") 2>&AC_FD_CC |
+	if (eval "$ac_cpp $READLINE_INCLUDES conftest.$ac_ext") 2>&AS_MESSAGE_LOG_FD |
 	  egrep "VERSION:" >conftest.out 2>&1; then
 changequote(,)dnl
 		readline_version=`cat conftest.out|sed -e 's/ //g' -e 's/^VERSION://' -e 's/\..*$//'`

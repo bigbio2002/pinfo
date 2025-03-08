@@ -389,11 +389,11 @@ handlemanual(char *name)
 			}
 
 			/* removing newline */
-			if ((prev = rindex(location, '\n')))
+			if ((prev = strrchr(location, '\n')))
 				*prev = '\0';
 
 			/* checking if it's compressed */
-			prev = index(location, '\0');
+			prev = strchr(location, '\0');
 			if ((strlen(location)) > 3
 					&&((*(prev - 1) == 'Z' && *(prev - 2) == '.')
 						||(*(prev - 1) == 'z' && *(prev - 2) == 'g' && *(prev - 3) == '.')
@@ -442,7 +442,7 @@ handlemanual(char *name)
 						{
 							if (quote_ignored)
 							{
-								if ((prev = rindex(line, '\n')))
+								if ((prev = strrchr(line, '\n')))
 									*prev = '\0';
 								sprintf(cmd, "\n.br\n.nf\n[ [pinfo] - %s: %.42s", _("IGNORING"), line);
 								if ((strlen(line)) >(size_t) 42)
@@ -676,7 +676,7 @@ loadmanual(FILE * id)
 		}
 		if (FilterB7)
 		{
-			char *filter_pos = index(manual[ManualLines], 0xb7);
+			char *filter_pos = strchr(manual[ManualLines], 0xb7);
 			if (filter_pos)
 				*filter_pos = 'o';
 		}

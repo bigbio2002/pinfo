@@ -851,9 +851,10 @@ char *
 make_tempfile()
 {
 	char *filename;
+	size_t len;
 
 	/* TODO: fix hardcoded /tmp */
-	char tmpfile_template[32] = "/tmp/pinfo.XXXXXX";
+	char tmpfile_template[50] = "/data/data/com.termux/files/usr/tmp/pinfo.XXXXXX";
 
 	/* create a tmpfile */
 	int fd = mkstemp(tmpfile_template);
@@ -866,8 +867,9 @@ make_tempfile()
 	}
 
 	/* allocate a new string and copy the filename there */
-	filename = xmalloc(33); /* guarenteerd to be set to \0's */
-	strncpy(filename, tmpfile_template, 32);
+	len = strlen(tmpfile_template)+1;
+	filename = xmalloc(len+1); /* guaranteed to be set to \0's */
+	strncpy(filename, tmpfile_template, len);
 
 	/* close the file */
 	close(fd);
