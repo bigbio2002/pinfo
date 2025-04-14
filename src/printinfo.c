@@ -21,6 +21,9 @@
 
 #include "common_includes.h"
 
+#include "initializelinks.h"
+#include "utils.h"
+
 /*
  * Algorithm: We first print highlights, then we send `\r' to the printer,
  * and we draw the base line. Thus highlights are printed `twice', and

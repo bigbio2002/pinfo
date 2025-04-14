@@ -23,6 +23,12 @@
 
 #include "common_includes.h"
 
+#include "localestuff.h"
+#include "parse_config.h"
+#include "mainfunction.h"
+#include "colors.h"
+#include "utils.h"
+
 void info_add_highlights(unsigned pos, unsigned cursor, unsigned long lines, unsigned column, char **message);
 
 void
@@ -315,7 +321,7 @@ info_add_highlights(unsigned pos, unsigned cursor, unsigned long lines, unsigned
 					 * and replace it by \0 */
 					tmp = str[n];
 					str[n] = 0;
-					
+
 					/* write out the highlighted match to screen */
 					attrset(searchhighlight);
 					mvaddstr(y, x, str);

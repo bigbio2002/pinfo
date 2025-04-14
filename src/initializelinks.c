@@ -20,6 +20,9 @@
  ***************************************************************************/
 #include "common_includes.h"
 
+#include "initializelinks.h"
+#include "utils.h"
+
 #define MENU_DOT 0
 #define NOTE_DOT 1
 
@@ -125,7 +128,7 @@ finddot(char *str, int mynote)
 	{
 		0, 0, 0, 0
 	};
-	char *closest = 0;
+	char *closest = NULL;
 	int i;
 	while (isspace(*ptr))	/* if there are only spaces and newline... */
 	{
@@ -195,8 +198,8 @@ void
 initializelinks(char *line1, char *line2, int line)
 {
 	char *tmp;
-	char *notestart = 0, *urlstart = 0, *urlend = 0;
-	char *quotestart = 0, *quoteend = 0;
+	char *notestart = NULL, *urlstart = NULL, *urlend = NULL;
+	char *quotestart = NULL, *quoteend = NULL;
 	char *buf = xmalloc(strlen(line1) + strlen(line2) + 1);
 	/* required to sort properly the hyperlinks from current line only */
 	unsigned long initialhyperobjectcount = hyperobjectcount;
@@ -621,7 +624,7 @@ handlenote:
 			 *****************************************************************/
 			else if ((tmp = strstr(notestart, ":")) != NULL)
 			{
-				char *start = 0, *end = 0, *dot = 0;
+				char *start = NULL, *end = NULL, *dot = NULL;
 				dot = finddot(tmp + 1, NOTE_DOT);	/* find the trailing dot */
 				if ( (dot != NULL) && ( dot + 7 < dot + strlen(dot)) )
 				{

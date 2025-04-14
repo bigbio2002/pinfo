@@ -21,6 +21,10 @@
 
 #include "common_includes.h"
 
+#include "menu_and_note_utils.h"
+#include "datatypes.h"
+#include "utils.h"
+
 void
 freeindirect()
 {

@@ -21,6 +21,9 @@
 
 #include "common_includes.h"
 
+#include "parse_config.h"
+#include "regexp_search.h"
+
 #ifndef ___DONT_USE_REGEXP_SEARCH___
 #include "regex.h"
 #include <ctype.h>

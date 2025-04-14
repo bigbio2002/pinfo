@@ -56,6 +56,7 @@
 #  error "No valid curses headers detected"
 #endif
 
+/*
 #include "localestuff.h"
 
 #include "datatypes.h"
@@ -72,6 +73,7 @@
 #include "keyboard.h"
 #include "initializelinks.h"
 #include "printinfo.h"
+*/
 
 /*
  * Readline isn't safe for nonlinux terminals (i.e. vt100)
@@ -93,15 +95,16 @@
 /* somewhat portable way of flagging unused vars
  * from https://stackoverflow.com/questions/7090998/portable-unused-parameter-macro-used-on-function-signature-for-c-and-c
  */
-#ifdef UNUSED
-#elif defined(__GNUC__)
-# define UNUSED(x) x __attribute__((unused))
-#elif defined(__LCLINT__)
-# define UNUSED(x) /*@unused@*/ x
-#elif defined(__cplusplus)
-# define UNUSED(x)
-#else
-# define UNUSED(x) x
+#ifndef UNUSED
+# if defined(__GNUC__)
+#  define UNUSED(x) x __attribute__((unused))
+# elif defined(__LCLINT__)
+#  define UNUSED(x) /*@unused@*/ x
+# elif defined(__cplusplus)
+#  define UNUSED(x)
+# else
+#  define UNUSED(x) x
+# endif
 #endif
 
 #endif

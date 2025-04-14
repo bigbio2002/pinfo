@@ -21,6 +21,9 @@
 
 #include "common_includes.h"
 
+#include "parse_config.h"
+#include "colors.h"
+
 #ifdef HAVE_CURSES_COLOR
 extern struct colours cols;
 #endif /* HAVE_CURSES_COLOR */

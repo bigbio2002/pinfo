@@ -1,0 +1,143 @@
+Checking src/filehandling_functions.c ...
+src/filehandling_functions.c:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src/filehandling_functions.c:734:19: warning: If resource allocation fails, then there is a possible null pointer dereference: id [nullPointerOutOfResources]
+  fputc(INFO_TAG, id);
+                  ^
+src/filehandling_functions.c:715:13: note: Assuming allocation function fails
+  id = fopen(tmpfilename, "w");
+            ^
+src/filehandling_functions.c:715:13: note: Assignment 'id=fopen(tmpfilename,"w")', assigned value is 0
+  id = fopen(tmpfilename, "w");
+            ^
+src/filehandling_functions.c:734:19: note: Null pointer dereference
+  fputc(INFO_TAG, id);
+                  ^
+src/filehandling_functions.c:735:15: warning: If resource allocation fails, then there is a possible null pointer dereference: id [nullPointerOutOfResources]
+  fputc('\n', id);
+              ^
+src/filehandling_functions.c:715:13: note: Assuming allocation function fails
+  id = fopen(tmpfilename, "w");
+            ^
+src/filehandling_functions.c:715:13: note: Assignment 'id=fopen(tmpfilename,"w")', assigned value is 0
+  id = fopen(tmpfilename, "w");
+            ^
+src/filehandling_functions.c:735:15: note: Null pointer dereference
+  fputc('\n', id);
+              ^
+src/filehandling_functions.c:737:10: warning: If resource allocation fails, then there is a possible null pointer dereference: id [nullPointerOutOfResources]
+  fclose(id);
+         ^
+src/filehandling_functions.c:715:13: note: Assuming allocation function fails
+  id = fopen(tmpfilename, "w");
+            ^
+src/filehandling_functions.c:715:13: note: Assignment 'id=fopen(tmpfilename,"w")', assigned value is 0
+  id = fopen(tmpfilename, "w");
+            ^
+src/filehandling_functions.c:737:10: note: Null pointer dereference
+  fclose(id);
+         ^
+src/filehandling_functions.c:831:38: warning: If memory allocation fails, then there is a possible null pointer dereference: filenameprefix [nullPointerOutOfMemory]
+     int prefixi, prefixlen = strlen(filenameprefix);
+                                     ^
+src/filehandling_functions.c:829:28: note: Assuming allocation function fails
+    filenameprefix = strdup(buf);
+                           ^
+src/filehandling_functions.c:829:28: note: Assignment 'filenameprefix=strdup(buf)', assigned value is 0
+    filenameprefix = strdup(buf);
+                           ^
+src/filehandling_functions.c:831:38: note: Null pointer dereference
+     int prefixi, prefixlen = strlen(filenameprefix);
+                                     ^
+src/filehandling_functions.c:833:11: warning: If memory allocation fails, then there is a possible null pointer dereference: filenameprefix [nullPointerOutOfMemory]
+      if (filenameprefix[prefixi] == '/')
+          ^
+src/filehandling_functions.c:829:28: note: Assuming allocation function fails
+    filenameprefix = strdup(buf);
+                           ^
+src/filehandling_functions.c:829:28: note: Assignment 'filenameprefix=strdup(buf)', assigned value is 0
+    filenameprefix = strdup(buf);
+                           ^
+src/filehandling_functions.c:833:11: note: Null pointer dereference
+      if (filenameprefix[prefixi] == '/')
+          ^
+src/filehandling_functions.c:985:13: warning: If memory allocation fails, then there is a possible null pointer dereference: lang [nullPointerOutOfMemory]
+  for (i=0; lang[i]!='\0'; i++)
+            ^
+src/filehandling_functions.c:983:16: note: Assuming allocation function fails
+  lang = strdup(rawlang);
+               ^
+src/filehandling_functions.c:983:16: note: Assignment 'lang=strdup(rawlang)', assigned value is 0
+  lang = strdup(rawlang);
+               ^
+src/filehandling_functions.c:985:13: note: Null pointer dereference
+  for (i=0; lang[i]!='\0'; i++)
+            ^
+src/filehandling_functions.c:988:8: warning: If memory allocation fails, then there is a possible null pointer dereference: lang [nullPointerOutOfMemory]
+   if (lang[i]=='.')
+       ^
+src/filehandling_functions.c:983:16: note: Assuming allocation function fails
+  lang = strdup(rawlang);
+               ^
+src/filehandling_functions.c:983:16: note: Assignment 'lang=strdup(rawlang)', assigned value is 0
+  lang = strdup(rawlang);
+               ^
+src/filehandling_functions.c:988:8: note: Null pointer dereference
+   if (lang[i]=='.')
+       ^
+src/filehandling_functions.c:993:8: warning: If memory allocation fails, then there is a possible null pointer dereference: lang [nullPointerOutOfMemory]
+   if (lang[i]=='_' && langshort==NULL)
+       ^
+src/filehandling_functions.c:983:16: note: Assuming allocation function fails
+  lang = strdup(rawlang);
+               ^
+src/filehandling_functions.c:983:16: note: Assignment 'lang=strdup(rawlang)', assigned value is 0
+  lang = strdup(rawlang);
+               ^
+src/filehandling_functions.c:993:8: note: Null pointer dereference
+   if (lang[i]=='_' && langshort==NULL)
+       ^
+src/filehandling_functions.c:996:5: warning: If memory allocation fails, then there is a possible null pointer dereference: langshort [nullPointerOutOfMemory]
+    langshort[i] = '\0';
+    ^
+src/filehandling_functions.c:995:23: note: Assuming allocation function fails
+    langshort = strdup(lang);
+                      ^
+src/filehandling_functions.c:995:23: note: Assignment 'langshort=strdup(lang)', assigned value is 0
+    langshort = strdup(lang);
+                      ^
+src/filehandling_functions.c:996:5: note: Null pointer dereference
+    langshort[i] = '\0';
+    ^
+Checking src/filehandling_functions.c: ENABLE_NLS...
+Checking src/filehandling_functions.c: HAVE_CONFIG_H...
+Checking src/filehandling_functions.c: HAVE_CURSES_H...
+Checking src/filehandling_functions.c: HAVE_NCURSESW_H...
+Checking src/filehandling_functions.c: HAVE_NCURSES_CURSES_H...
+Checking src/filehandling_functions.c: SIG_BLOCK...
+Checking src/filehandling_functions.c: UNUSED...
+Checking src/filehandling_functions.c: __GNUC__...
+Checking src/filehandling_functions.c: __LCLINT__...
+Checking src/filehandling_functions.c: ___DEBUG___...
+Checking src/filehandling_functions.c: ___DONT_USE_REGEXP_SEARCH___...
+Checking src/parse_config.c ...
+src/parse_config.c:0:0: information: Limiting analysis of branches. Use --check-level=exhaustive to analyze all branches. [normalCheckLevelMaxBranches]
+
+^
+src/parse_config.c:710:5: error: Common realloc mistake: 'h_regexp' nulled but not freed upon failure [memleakOnRealloc]
+    h_regexp = realloc(h_regexp, sizeof(regex_t) *(h_regexp_num + 1));
+    ^
+Checking src/parse_config.c: ENABLE_NLS...
+Checking src/parse_config.c: HAVE_CONFIG_H...
+Checking src/parse_config.c: HAVE_CURSES_COLOR...
+Checking src/parse_config.c: HAVE_CURSES_COLOR;HAVE_DECL_USE_DEFAULT_COLORS...
+Checking src/parse_config.c: HAVE_CURSES_H...
+Checking src/parse_config.c: HAVE_DECL_USE_DEFAULT_COLORS...
+Checking src/parse_config.c: HAVE_NCURSESW_H...
+Checking src/parse_config.c: HAVE_NCURSES_CURSES_H...
+Checking src/parse_config.c: KEY_END...
+Checking src/parse_config.c: SIG_BLOCK...
+Checking src/parse_config.c: UNUSED...
+nofile:0:0: information: Too many #ifdef configurations - cppcheck only checks 12 configurations. Use --force to check all configurations. For more details, use --enable=information. [toomanyconfigs]
+

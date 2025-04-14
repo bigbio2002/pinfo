@@ -20,15 +20,24 @@
  ***************************************************************************/
 #include "common_includes.h"
 
+#include "mainfunction.h"
+#include "localestuff.h"
+#include "initializelinks.h"
+#include "regexp_search.h"
+#include "parse_config.h"
+#include "printinfo.h"
+#include "menu_and_note_utils.h"
+#include "filehandling_functions.h"
+#include "keyboard.h"
+#include "video.h"
+#include "colors.h"
+#include "utils.h"
+
 #include <ctype.h>
 
 #ifndef MIN
 #define        MIN(a,b)(((a)<(b))?(a):(b))
 #endif
-
-void rescan_cursor();	/* set the cursor to 1st item on visible screen */
-void next_infomenu();	/* go to the next menu item for sequential reading */
-int getnodeoffset(int tag_table_pos, int *Indstart);	/* get node offset in file */
 
 int aftersearch = 0;
 /*

@@ -22,6 +22,8 @@
 #ifndef __UTILS_H
 #define __UTILS_H
 
+#include "datatypes.h"
+
 extern char *safe_user;
 extern char *safe_group;
 

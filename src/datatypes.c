@@ -20,9 +20,12 @@
  ***************************************************************************/
 #include "common_includes.h"
 
+#include "datatypes.h"
+#include "utils.h"
+
 int verbose = 1;
 
-char *filenameprefix = 0;
+char *filenameprefix = NULL;
 
 char *httpviewer = "lynx";
 char *ftpviewer = "lynx";
@@ -30,19 +33,19 @@ char *maileditor = "mail";
 char *printutility = "lpr";
 char *manlinks = "1:8:2:3:4:5:6:7:9:n:l:p:o:3X11:3Xt:3X:3x";
 char *configuredinfopath = ".:/data/data/com.termux/files/usr/share/info:/data/data/com.termux/files/usr/info:/data/data/com.termux/files/usr/local/share/info:/data/data/com.termux/files/usr/local/info";
-char *ignoredmacros = 0;
+char *ignoredmacros = NULL;
 char *rcfile = NULL;
 
-char *tmpfilename1 = 0;
-char *tmpfilename2 = 0;
+char *tmpfilename1 = NULL;
+char *tmpfilename2 = NULL;
 
 SearchAgain searchagain;
 
-HyperObject *hyperobjects = 0;
+HyperObject *hyperobjects = NULL;
 unsigned long hyperobjectcount = 0;
 
-Indirect *indirect = 0;
-TagTable *tag_table = 0;
+Indirect *indirect = NULL;
+TagTable *tag_table = NULL;
 long FirstNodeOffset = 0;
 char FirstNodeName[256];
 unsigned IndirectEntries = 0;

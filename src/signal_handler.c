@@ -20,6 +20,11 @@
  ***************************************************************************/
 #include "common_includes.h"
 
+#include "datatypes.h"
+#include "parse_config.h"
+#include "keyboard.h"
+#include "utils.h"
+
 #include <termios.h>
 #include <sys/ioctl.h>
 
@@ -68,7 +73,7 @@ void
 signal_handler()
 {
 	sigset_t sigs;
-	
+
 	signal(SIGINT, handle_crash);	/* handle ^C */
 	signal(SIGTERM, handle_crash);	/* handle soft kill */
 	signal(SIGSEGV, handle_crash);	/* handle seg. fault */

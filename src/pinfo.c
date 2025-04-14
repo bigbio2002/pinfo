@@ -21,6 +21,19 @@
 
 #include "common_includes.h"
 
+#include "pinfo.h"
+#include "mainfunction.h"
+#include "localestuff.h"
+#include "filehandling_functions.h"
+#include "parse_config.h"
+#include "signal_handler.h"
+#include "datatypes.h"
+#include "manual.h"
+#include "menu_and_note_utils.h"
+#include "initializelinks.h"
+#include "colors.h"
+#include "utils.h"
+
 #ifdef HAVE_GETOPT_LONG
  #include <getopt.h>
 #endif
@@ -28,18 +41,10 @@
 char *version = PACKAGE_VERSION;
 
 /* currently viewed filename */
-char *curfile = 0;
+char *curfile = NULL;
 
 /* node specified by --node option */
-char *pinfo_start_node = 0;
-
-/* strip `.info' suffix from  "file" */
-void strip_file_from_info_suffix(char *file);
-/* add `.info' suffix to "file" */
-char *addinfosuffix(char *file);
-
-/* protect against bad, bad macros */
-void checksu();
+char *pinfo_start_node = NULL;
 
 int
 main(int argc, char *argv[])
@@ -54,9 +59,9 @@ main(int argc, char *argv[])
 	/* line count in message */
 	unsigned long lines = 0;
 	/* this will hold node's text */
-	char **message = 0;
+	char **message = NULL;
 	/* this will hold the node's header */
-	char *type = 0;
+	char *type = NULL;
 	int tag_table_pos = 1;
 	char *file_name_force = NULL;
 #ifdef HAVE_GETOPT_LONG

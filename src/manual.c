@@ -24,37 +24,22 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
+#include "mainfunction.h"
+#include "localestuff.h"
+#include "datatypes.h"
+#include "initializelinks.h"
+#include "parse_config.h"
+#include "keyboard.h"
+#include "colors.h"
+#include "utils.h"
+#include "manual.h"
+
 #define HTTPSECTION 100
 #define FTPSECTION 101
 #define MAILSECTION 102
 
-/* check if a char is a hyphen character */
-int ishyphen(unsigned char ch);
-/* load manual */
-void loadmanual(FILE * id);
-/* handle keyboard */
-int manualwork();
-void rescan_selected();	/* scan for potential link to select on
-							   viewed manual page */
-/* self explanatory */
-void showmanualscreen();
-/* mvaddstr with bold/italic */
-void mvaddstr_manual(int y, int x, char *str);
-/* adds highlights to a painted screen */
-void add_highlights();
-/* strips line from formatting characters */
-void strip_manual(char *buf);
-/*
- * Initialize links in a line .  Links are entries of form reference(section),
- * and are stored in `manuallinks' var, described bellow.
- */
-void man_initializelinks(char *line, int carry);
-int is_in_manlinks(char *in, char *find);
-
-void printmanual(char **Message, long Lines);
-
 /* line by line stored manual */
-char **manual = 0;
+char **manual = NULL;
 /* number of lines in manual */
 unsigned ManualLines = 0;
 int selected = -1;		/* number of selected link(offset in 'manuallinks',
@@ -87,7 +72,7 @@ manhistory;			/*
 					 */
 
 /* manual lastread history */
-manhistory *manualhistory = 0;
+manhistory *manualhistory = NULL;
 /* length of the above table - 1 */
 int manualhistorylength = 0;
 
@@ -108,7 +93,7 @@ typedef struct
 manuallink;
 
 /* a set of manual references of man page */
-manuallink *manuallinks = 0;
+manuallink *manuallinks = NULL;
 
 /* number of found manual references in man page */
 unsigned ManualLinks = 0;
@@ -286,8 +271,8 @@ handlemanual(char *name)
 
 	char manualname[256];
 	char cmd[4096];
-	char *raw_tempfilename = 0;
-	char *apropos_tempfilename = 0;
+	char *raw_tempfilename = NULL;
+	char *apropos_tempfilename = NULL;
 
 	if (tmpfilename1)
 	{

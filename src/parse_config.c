@@ -21,13 +21,19 @@
 
 #include "common_includes.h"
 
+#include "parse_config.h"
+#include "localestuff.h"
+#include "keyboard.h"
+#include "datatypes.h"
+#include "utils.h"
+
 #include <ctype.h>
 
 #ifdef HAVE_DECL_USE_DEFAULT_COLORS
 # define COLOR_DEFAULT (-1)	/* ncurses extension to use default color, see default_colors(3NCURSES) */
 #endif
 
-regex_t *h_regexp = 0;	/* regexps to highlight */
+regex_t *h_regexp = NULL;	/* regexps to highlight */
 int h_regexp_num = 0;	/* number of those regexps */
 
 struct keybindings keys =
@@ -89,7 +95,7 @@ struct colours cols =
 int
 parse_config(void)
 {
-	char config_file_name[256], *home = 0;
+	char config_file_name[256], *home = NULL;
 	char line[256];
 	FILE *f;
 	int line_number = 0;

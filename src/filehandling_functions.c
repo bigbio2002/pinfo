@@ -22,6 +22,13 @@
 
 #include "common_includes.h"
 
+#include "filehandling_functions.h"
+#include "localestuff.h"
+#include "initializelinks.h"
+#include "datatypes.h"
+#include "colors.h"
+#include "utils.h"
+
 typedef struct
 {
 	char *suffix;
@@ -49,7 +56,7 @@ Suffixes suffixes[SuffixesNumber] =
 
 /*****************************************************************************/
 
-char **infopaths = 0;
+char **infopaths = NULL;
 int infopathcount = 0;
 
 int
@@ -140,7 +147,7 @@ dirpage_lookup(char **type, char ***message, unsigned long *lines,
 #define Type	(*type)
 #define Message	(*message)
 #define Lines	(*lines)
-	FILE *id = 0;
+	FILE *id = NULL;
 	int filenamelen = strlen(filename);
 	int goodHit = 0;
 	char name[256];
@@ -1120,7 +1127,7 @@ initpaths()
 void
 create_indirect_tag_table()
 {
-	FILE *id = 0;
+	FILE *id = NULL;
 	int initial;
 	for (unsigned i = 1; i <= IndirectEntries; i++)
 	{
@@ -1284,7 +1291,7 @@ strip_compression_suffix(char *file)
 {
 	const size_t len = strlen(file);
 	assert(len<1024); /* just some random limit */
-	char *found = 0;
+	char *found = NULL;
 
 	for (unsigned j = 0; j < SuffixesNumber; j++)
 	{
@@ -1306,7 +1313,7 @@ strip_info_suffix(char *file)
 	const size_t len = strlen(file);
 	assert(len<1024); /* just some random limit */
 
-	char *found = 0;
+	char *found = NULL;
 	const char suffix[6] = ".info";
 
 	if ( (found = strstr(file, suffix)) != NULL )

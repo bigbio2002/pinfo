@@ -21,6 +21,14 @@
 
 #include "common_includes.h"
 
+#include "localestuff.h"
+#include "parse_config.h"
+#include "initializelinks.h"
+#include "keyboard.h"
+#include "colors.h"
+#include "utils.h"
+
+#include <errno.h>
 #include <regex.h>
 #include <ctype.h>
 #include <sys/select.h>
@@ -40,7 +48,7 @@ curs_set(int a)
 #endif
 
 #ifdef ___DONT_USE_REGEXP_SEARCH___
-char *pinfo_re_pattern = 0;
+char *pinfo_re_pattern = NULL;
 #else
 int pinfo_re_offset = -1;
 #endif

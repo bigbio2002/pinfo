@@ -20,7 +20,9 @@
  ***************************************************************************/
 #include "common_includes.h"
 
-char **rlhistory = 0;
+#include "utils.h"
+
+char **rlhistory = NULL;
 int rlhistorylen = 0;
 int rlhistorypos = 0;
 
@@ -168,7 +170,7 @@ readlinewrapper(char *prompt)
 							addch(' ');
 						move(origy, origx + cursor);
 					}
-					
+
 					/* if the cursor is not at the last pos */
 					if (strlen(buf + cursor))
 					{
