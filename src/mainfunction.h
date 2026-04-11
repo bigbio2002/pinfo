@@ -37,8 +37,8 @@ WorkRVal;
 /* this determines whether we are in a position, found after search */
 extern int aftersearch;
 
-void rescan_cursor();   /* set the cursor to 1st item on visible screen */
-void next_infomenu();   /* go to the next menu item for sequential reading */
+void rescan_cursor(void);   /* set the cursor to 1st item on visible screen */
+void next_infomenu(void);   /* go to the next menu item for sequential reading */
 int getnodeoffset(int tag_table_pos, int *Indstart);    /* get node offset in file */
 
 /*

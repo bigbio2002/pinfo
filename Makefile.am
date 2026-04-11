@@ -1,5 +1,6 @@
 # no FSF/GNU fascism
-AUTOMAKE_OPTIONS=foreign
+AUTOMAKE_OPTIONS = foreign
+ACLOCAL_AMFLAGS = -I macros
 
 always_built_SUBDIRS = src
 
@@ -13,6 +14,3 @@ EXTRA_DIST =  TECHSTUFF pinfo.spec Changelog.old Changelog
 rpm: Makefile
 	$(MAKE) dist
 	rpm -ta --clean $(PACKAGE)-$(VERSION).tar.gz
-
-
-ACLOCAL_AMFLAGS = -I macros

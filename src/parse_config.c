@@ -115,7 +115,7 @@ parse_config(void)
 			if (getenv("HOME"))
 				home = strdup(getenv("HOME"));
 			else
-				home = 0;
+				home = NULL;
 		}
 		if (home)
 		{
@@ -147,7 +147,10 @@ parse_config(void)
 		{
 			fclose(f);
 			if (home)
+			{
 				free(home);
+				home = NULL;
+			}
 			return 0;
 		}
 		if (parse_line(line))
@@ -163,7 +166,10 @@ parse_config(void)
 
 	fclose(f);
 	if (home)
+	{
 		free(home);
+		home = NULL;
+	}
 	return 0;
 }
 
@@ -903,8 +909,8 @@ parse_line(char *line)
 							*key = KEY_CTRL(temp[2]);
 						else if (isdigit(temp[1]))
 						{
-							char *tail = temp +(strlen(temp));
-							*key = KEY_CTRL((int) strtol(temp + 1, &tail, 10));
+							char *tail = temp + strlen(temp);
+							*key = KEY_CTRL((int)strtol(temp + 1, &tail, 10));
 						}
 						else
 							return 1;
@@ -922,8 +928,8 @@ parse_line(char *line)
 							*key = KEY_ALT(tolower(temp[2]));
 						else if (isdigit(temp[1]))
 						{
-							char *tail = temp +(strlen(temp));
-							*key = KEY_ALT((int) strtol(temp + 1, &tail, 10));
+							char *tail = temp + strlen(temp);
+							*key = KEY_ALT((int)strtol(temp + 1, &tail, 10));
 						}
 						else
 							return 1;
@@ -956,8 +962,8 @@ parse_line(char *line)
 			}
 			else if (isdigit(temp[0]))
 			{
-				char *tail = temp +(strlen(temp));
-				*key =(int) strtol(temp, &tail, 10);
+				char *tail = temp + strlen(temp);
+				*key = (int)strtol(temp, &tail, 10);
 			}
 		}
 

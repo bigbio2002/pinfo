@@ -89,9 +89,9 @@ xfree(void *ptr)
 	unsigned long msize = 0;
 	for (i = 0; i < addrescount; i++)
 		msize += msizes[i];
-	fprintf(stderr, "Size: %lu, count: %ld, freeing %lu\n", msize, addrescount,(unsigned long) ptr);
+	fprintf(stderr, "Size: %lu, count: %ld, freeing %lu\n", msize, addrescount, (unsigned long)ptr);
 	for (i = 0; i < addrescount; i++)
-		if (malloc_addr[i] ==(unsigned long) ptr)
+		if (malloc_addr[i] == (unsigned long)ptr)
 		{
 			flag = 1;
 			for (j = i + 1; j < addrescount; j++)
@@ -131,11 +131,13 @@ xmalloc(size_t size)
 #ifdef ___DEBUG___
 	for (i = 0; i < addrescount; i++)
 		msize += msizes[i];
-	fprintf(stderr, "Size %lu, count: %ld, allocated %lu\n", msize, addrescount,(unsigned long) value);
-	malloc_addr[addrescount] =(unsigned long) value;
+	fprintf(stderr, "Size %lu, count: %ld, allocated %lu\n", msize, addrescount, (unsigned long)value);
+	malloc_addr[addrescount] = (unsigned long)value;
 	msizes[addrescount] = size;
 	if (addrescount < 1000)
+	{
 		addrescount++;
+	}
 	else
 	{
 		fprintf(stderr, "trace buffer exhausted\n");
@@ -155,9 +157,9 @@ xrealloc(void *ptr, size_t size)
 	unsigned long msize = 0;
 	for (i = 0; i < addrescount; i++)
 		msize += msizes[i];
-	fprintf(stderr, "Size: %lu, count: %ld, reallocating %lu to ", msize, addrescount,(unsigned long) ptr);
+	fprintf(stderr, "Size: %lu, count: %ld, reallocating %lu to ", msize, addrescount, (unsigned long)ptr);
 	for (i = 0; i < addrescount; i++)
-		if (malloc_addr[i] ==(unsigned long) ptr)
+		if (malloc_addr[i] == (unsigned long)ptr)
 		{
 			flag = 1;
 			for (j = i + 1; j < addrescount; j++)
@@ -185,11 +187,13 @@ xrealloc(void *ptr, size_t size)
 		exit(1);
 	}
 #ifdef ___DEBUG___
-	fprintf(stderr, "%lu, with size %lu\n",(unsigned long) value,(unsigned long) size);
-	malloc_addr[addrescount] =(unsigned long) value;
+	fprintf(stderr, "%lu, with size %lu\n", (unsigned long)value, (unsigned long)size);
+	malloc_addr[addrescount] = (unsigned long)value;
 	msizes[addrescount] = size;
 	if (addrescount < 1000)
+	{
 		addrescount++;
+	}
 	else
 	{
 		fprintf(stderr, "trace buffer exhausted\n");
@@ -202,7 +206,7 @@ xrealloc(void *ptr, size_t size)
 int
 system_check(const char *command)
 {
-	if (command==NULL)
+	if (command == NULL)
 	{
 		return -1;
 	}
@@ -226,7 +230,7 @@ xsystem(const char *command)
 }
 
 void
-initlocale()
+initlocale(void)
 {
 #ifdef ___DEBUG___
 	int i;
@@ -268,7 +272,7 @@ checkfilename(char *filename)
 #ifdef HAS_READLINE
 /* custom function that readline will use to display text */
 void
-my_rl_display()
+my_rl_display(void)
 {
 	static size_t len = 0;
 
@@ -305,7 +309,7 @@ my_rl_completion_display(char **matches, int num_matches, int UNUSED(max_length)
 		printw("%s ", matches[i]);
 	}
 	/* and return prompt to correct position */
-	move(maxy-1, strlen(rl_prompt) + strlen(matches[0]) );
+	move(maxy-1, strlen(rl_prompt) + strlen(matches[0]));
 
 	refresh();
 }
@@ -377,7 +381,7 @@ getstring(char *prompt)
 }
 
 char *
-getstring_with_completion(char *prompt, const char * const * completions)
+getstring_with_completion(char *prompt, const char * const *completions)
 {
 	char *buf;
 
@@ -412,7 +416,7 @@ getstring_with_completion(char *prompt, const char * const * completions)
 }
 
 void
-init_curses()
+init_curses(void)
 {
 	FILE *f = fopen("/dev/tty", "r+");
 	SCREEN *screen = newterm(NULL, f, f);
@@ -434,7 +438,7 @@ init_curses()
 
 
 void
-closeprogram()
+closeprogram(void)
 {
 	if (curses_open)
 		myendwin();
@@ -461,7 +465,7 @@ int
 gettagtablepos_search_internal(char *node, int left, int right)
 {
 	/* left+(right-left)/2 */
-	int thispos = left +((right - left) >> 1);
+	int thispos = left + ((right - left) >> 1);
 	int compare_result = compare_tag_table_string(tag_table[thispos].nodename, node);
 	if (compare_result == 0)
 		return thispos;
@@ -493,7 +497,7 @@ gettagtablepos(char *node)
 	/* strip spaces from the beginning */
 	while (1)
 	{
-		if ((*node != ' ') &&(*node != '\t'))
+		if ((*node != ' ') && (*node != '\t'))
 			break;
 		node++;
 	}
@@ -501,7 +505,7 @@ gettagtablepos(char *node)
 }
 
 int
-pinfo_getch()
+pinfo_getch(void)
 {
 	int key = getch();
 	/* following key will be alt's value */
@@ -514,7 +518,7 @@ pinfo_getch()
 }
 
 void
-waitforgetch()
+waitforgetch(void)
 {
 	int ret;
 
@@ -643,7 +647,7 @@ yesno(char *prompt, int def)
 }
 
 void
-myclrtoeol()
+myclrtoeol(void)
 {
 	unsigned x, y;
 	getyx(stdscr, y, x);
@@ -667,14 +671,14 @@ copy_stripped_from_regexp(char *src, char *dest)
 }
 
 void
-myendwin()
+myendwin(void)
 {
 	curs_set(shell_cursor);
 	endwin();
 }
 
 void
-handlewinch()
+handlewinch(void)
 {
 	myendwin();
 	init_curses();
@@ -856,13 +860,13 @@ calculate_len(char *start, char *end)
  * allocated string
  */
 char *
-make_tempfile()
+make_tempfile(void)
 {
 	char *filename;
 	size_t len;
 
 	/* TODO: fix hardcoded /tmp */
-	char tmpfile_template[50] = "/data/data/com.termux/files/usr/tmp/pinfo.XXXXXX";
+	char tmpfile_template[] = "/data/data/com.termux/files/usr/tmp/pinfo.XXXXXX";
 
 	/* create a tmpfile */
 	int fd = mkstemp(tmpfile_template);

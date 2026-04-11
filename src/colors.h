@@ -58,6 +58,6 @@ extern int searchhighlight;
  * initialize color values/attributes/etc.  Either for color and monochrome
  * mode.
  */
-void initcolors ();
+void initcolors (void);
 
 #endif

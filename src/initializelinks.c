@@ -87,7 +87,7 @@ exists_in_tag_table(char *item)
 
 
 void
-freelinks()			/* frees space allocated previously by node-links */
+freelinks(void)			/* frees space allocated previously by node-links */
 {
 	if ((hyperobjects)&&(hyperobjectcount))
 		xfree(hyperobjects);

@@ -26,7 +26,7 @@
 #include "utils.h"
 
 void
-freeindirect()
+freeindirect(void)
 {
 	if (indirect)
 	{
@@ -37,7 +37,7 @@ freeindirect()
 }
 
 void
-freetagtable()
+freetagtable(void)
 {
 	if (tag_table)
 	{

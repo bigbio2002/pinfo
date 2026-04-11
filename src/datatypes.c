@@ -32,7 +32,7 @@ char *ftpviewer = "lynx";
 char *maileditor = "mail";
 char *printutility = "lpr";
 char *manlinks = "1:8:2:3:4:5:6:7:9:n:l:p:o:3X11:3Xt:3X:3x";
-char *configuredinfopath = ".:/data/data/com.termux/files/usr/share/info:/data/data/com.termux/files/usr/info:/data/data/com.termux/files/usr/local/share/info:/data/data/com.termux/files/usr/local/info";
+char *configuredinfopath = ".:/data/data/com.termux/files/usr/share/info:/data/data/com.termux/files/usr/local/share/info";
 char *ignoredmacros = NULL;
 char *rcfile = NULL;
 
@@ -79,14 +79,14 @@ int grab_mouse = 0;
 int winchanged = 0;
 
 void
-inithistory()
+inithistory(void)
 {
 	infohistory.length = 0;
-	infohistory.node = 0;
-	infohistory.file = 0;
-	infohistory.pos = 0;
-	infohistory.cursor = 0;
-	infohistory.menu = 0;
+	infohistory.node = NULL;
+	infohistory.file = NULL;
+	infohistory.pos = NULL;
+	infohistory.cursor = NULL;
+	infohistory.menu = NULL;
 }
 
 /*
@@ -128,19 +128,19 @@ addinfohistory(char *file, char *node, int cursor, int mymenu, int pos)
  * Delete last history entry
  */
 void
-dellastinfohistory()
+dellastinfohistory(void)
 {
 	if (infohistory.length)
 	{
 		if (infohistory.node[infohistory.length])
 		{
 			xfree(infohistory.node[infohistory.length]);
-			infohistory.node[infohistory.length] = 0;
+			infohistory.node[infohistory.length] = NULL;
 		}
 		if (infohistory.file[infohistory.length])
 		{
 			xfree(infohistory.file[infohistory.length]);
-			infohistory.file[infohistory.length] = 0;
+			infohistory.file[infohistory.length] = NULL;
 		}
 		if (infohistory.length)
 			infohistory.length--;
@@ -157,38 +157,38 @@ dellastinfohistory()
 			if (infohistory.node)
 			{
 				xfree(infohistory.node);
-				infohistory.node = 0;
+				infohistory.node = NULL;
 			}
 			if (infohistory.file)
 			{
 				xfree(infohistory.file);
-				infohistory.file = 0;
+				infohistory.file = NULL;
 			}
 			if (infohistory.pos)
 			{
 				xfree(infohistory.pos);
-				infohistory.pos = 0;
+				infohistory.pos = NULL;
 			}
 			if (infohistory.cursor)
 			{
 				xfree(infohistory.cursor);
-				infohistory.cursor = 0;
+				infohistory.cursor = NULL;
 			}
 			if (infohistory.menu)
 			{
 				xfree(infohistory.menu);
-				infohistory.menu = 0;
+				infohistory.menu = NULL;
 			}
 		}
 	}
 }
 
 void
-clearfilenameprefix()
+clearfilenameprefix(void)
 {
 	if (filenameprefix)
 	{
 		xfree(filenameprefix);
-		filenameprefix = 0;
+		filenameprefix = NULL;
 	}
 }

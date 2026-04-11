@@ -7,6 +7,6 @@ void strip_file_from_info_suffix(char *file);
 char *addinfosuffix(char *file);
 
 /* protect against bad, bad macros */
-void checksu();
+void checksu(void);
 
 #endif

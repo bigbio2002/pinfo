@@ -419,7 +419,7 @@ fmtstr(char *buffer, size_t * currlen, size_t maxlen,
 
 /* Have to handle DP_F_NUM(ie 0x and 0 alternates) */
 
-	static void
+static void
 fmtint(char *buffer, size_t * currlen, size_t maxlen,
 		long value, int base, int min, int max, int flags)
 {
@@ -516,7 +516,7 @@ fmtint(char *buffer, size_t * currlen, size_t maxlen,
 	}
 }
 
-	static long double
+static long double
 abs_val(long double value)
 {
 	long double result = value;
@@ -527,7 +527,7 @@ abs_val(long double value)
 	return result;
 }
 
-	static long double
+static long double
 pow10(int exp)
 {
 	long double result = 1;
@@ -541,7 +541,7 @@ pow10(int exp)
 	return result;
 }
 
-	static long
+static long
 round(long double value)
 {
 	long intpart;
@@ -554,7 +554,7 @@ round(long double value)
 	return intpart;
 }
 
-	static void
+static void
 fmtfp(char *buffer, size_t * currlen, size_t maxlen,
 		long double fvalue, int min, int max, int flags)
 {
@@ -696,7 +696,7 @@ fmtfp(char *buffer, size_t * currlen, size_t maxlen,
 	}
 }
 
-	static void
+static void
 dopr_outch(char *buffer, size_t * currlen, size_t maxlen, char c)
 {
 	if (*currlen < maxlen)
@@ -705,7 +705,7 @@ dopr_outch(char *buffer, size_t * currlen, size_t maxlen, char c)
 #endif /* !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF) */
 
 #ifndef HAVE_VSNPRINTF
-	int
+int
 vsnprintf(char *str, size_t count, const char *fmt, va_list args)
 {
 	str[0] = 0;
@@ -717,10 +717,10 @@ vsnprintf(char *str, size_t count, const char *fmt, va_list args)
 #ifndef HAVE_SNPRINTF
 /* VARARGS3 */
 #ifdef HAVE_STDARGS
-	int
+int
 snprintf(char *str, size_t count, const char *fmt,...)
 #else
-	int
+int
 snprintf(va_alist)
 	va_dcl
 #endif

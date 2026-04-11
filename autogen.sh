@@ -12,7 +12,7 @@ do
 done
 
 echo Running autoreconf...
-autoreconf --install --symlink --verbose
+autoreconf --install --verbose
 if [ -d ".git" ]
 then
 	git log > Changelog

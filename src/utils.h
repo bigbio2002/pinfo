@@ -40,7 +40,7 @@ int pinfo_re_comp (char *name);
 int pinfo_re_exec (char *name);
 
 /* user defined getch, capable of handling ALT keybindings */
-int pinfo_getch ();
+int pinfo_getch (void);
 /* free() wrapper */
 void xfree (void *ptr);
 /* malloc() wrapper */
@@ -52,26 +52,26 @@ int system_check(const char *command);
 /* safe, error-checking, command execution */
 void xsystem(const char *command);
 /* initializes GNU locales */
-void initlocale ();
+void initlocale (void);
 /* checks if file name does not cause secuirity problems */
 void checkfilename (char *filename);
 /* closes the program, and removes temporary files */
-void closeprogram ();
+void closeprogram (void);
 /* initializes curses interface */
-void init_curses ();
+void init_curses (void);
 /* an interface to gnu readline */
 char *getstring (char *prompt);
 char *getstring_with_completion (char *prompt, const char * const *completions);
 /* create a completion table from a tag_table */
-const char ** completions_from_tag_table(TagTable * table, size_t num);
+const char ** completions_from_tag_table(TagTable *table, size_t num);
 /* for some reasons mvhline does not work quite properly... */
 void mymvhline (int y, int x, char ch, int len);
 /* this one supports color back/foreground */
-void myclrtoeol ();
+void myclrtoeol (void);
 /* takes care of the cursor, which is turned off */
-void myendwin ();
+void myendwin (void);
 /* ? */
-void handlewinch ();
+void handlewinch (void);
 /* get offset of "node" in tag_table variable */
 int gettagtablepos (char *node);
 
@@ -82,7 +82,7 @@ void copy_stripped_from_regexp (char *src, char *dest);
 
 
 /* Block until something's on STDIN */
-void waitforgetch ();
+void waitforgetch (void);
 
 /* is curses screen open? */
 extern int curses_open;
@@ -117,7 +117,7 @@ calculate_len(char *start, char *end);
  *   * allocated string
  *    */
 char *
-make_tempfile();
+make_tempfile(void);
 
 
 #endif

@@ -1234,7 +1234,7 @@ skip_search:
 }
 
 void
-next_infomenu()
+next_infomenu(void)
 {
 	if (hyperobjectcount == 0)
 	{
@@ -1253,7 +1253,7 @@ next_infomenu()
 }
 
 void
-rescan_cursor()
+rescan_cursor(void)
 {
 	for (unsigned long i = 0; i < hyperobjectcount; i++)
 	{

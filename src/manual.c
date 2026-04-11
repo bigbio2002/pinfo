@@ -104,7 +104,7 @@ int historical = 0;
 
 void
 /* free buffers allocated by current man page */
-manual_free_buffers()
+manual_free_buffers(void)
 {
 	unsigned int i;
 	/* first free previously allocated memory */
@@ -137,20 +137,21 @@ manual_free_buffers()
 void
 set_initial_history(char *name)
 {
-	int len = strlen(name), i;
+	int len = strlen(name);
+	int i;
 	char *name1 = strdup(name);
 
 	/* one object of array */
 	manualhistory = xmalloc(sizeof(manhistory));
 	/* filter trailing spaces */
-	while ((len > 1) &&(isspace(name1[len - 1])))
+	while ((len > 1) && isspace(name1[len - 1]))
 	{
 		name1[len - 1] = 0;
 		len--;
 	}
 	i = len;
 	/* find the beginning of the last token */
-	for (i = len - 1;(i > 0) &&(!isspace(name1[i])); i--);
+	for (i = len - 1; (i > 0) && !isspace(name1[i]); i--);
 
 	/* if we've found space, then we move to the first nonspace character */
 	if (i > 0)
@@ -223,10 +224,10 @@ construct_manualname(char *buf, int which)
 			char *base = xmalloc(1024);
 			char *ptr;
 			int tmppos;
-			strncpy(base, manual[manuallinks[which].line - 1],1023);
+			strncpy(base, manual[manuallinks[which].line - 1], 1023);
 			strip_manual(base);
 			ptr = base + strlen(base) - 3;
-			while (((isalpha(*ptr)) ||(*ptr == '.') ||(*ptr == '_')) &&(ptr > base))
+			while ((isalpha(*ptr) || (*ptr == '.') || (*ptr == '_')) && (ptr > base))
 				ptr--;
 			/* workaround for man pages with leading '(' see svgalib man pages */
 			if (*ptr == '(')
@@ -286,11 +287,11 @@ handlemanual(char *name)
 	/* if ncurses, get maxx and maxy */
 	getmaxyx(stdscr, maxy, maxx);
 	myendwin();
-	if ((!getenv("MANWIDTH")) ||(manwidthChanged))
+	if (!getenv("MANWIDTH") || manwidthChanged)
 	{
 		/* set MANWIDTH environment variable */
 		static char tmp[24];
-		snprintf(tmp, 24, "MANWIDTH=%d", maxx);
+		snprintf(tmp, 24, "MANWIDTH=%u", maxx);
 		putenv(tmp);
 		manwidthChanged = 1;
 	}
@@ -354,18 +355,18 @@ handlemanual(char *name)
 			ignored_items++;
 			prev = ignoredmacros;
 			/* counting items */
-			while ((end = strchr(prev, ':')))
+			while (end = strchr(prev, ':'))
 			{
 				ignored_items++;
 				prev = end + 1;
 			}
 
-			ignored_entries =(char **) xmalloc(ignored_items * sizeof(char **));
+			ignored_entries = (char **)xmalloc(ignored_items * sizeof(char **));
 			ignored_entries[0] = ignoredmacros;
 			prev = ignoredmacros;
 			i = 0;
 			/* creating pointers */
-			while ((end = strchr(prev, ':')))
+			while (end = strchr(prev, ':'))
 			{
 				*end = '\0';
 				prev = end + 1;
@@ -374,16 +375,14 @@ handlemanual(char *name)
 			}
 
 			/* removing newline */
-			if ((prev = strrchr(location, '\n')))
+			if (prev = strrchr(location, '\n'))
 				*prev = '\0';
 
 			/* checking if it's compressed */
 			prev = strchr(location, '\0');
-			if ((strlen(location)) > 3
-					&&((*(prev - 1) == 'Z' && *(prev - 2) == '.')
-						||(*(prev - 1) == 'z' && *(prev - 2) == 'g' && *(prev - 3) == '.')
-					   )
-			   )
+			if (strlen(location) > 3
+					&& (*(prev - 1) == 'Z' && *(prev - 2) == '.')
+						|| (*(prev - 1) == 'z' && *(prev - 2) == 'g' && *(prev - 3) == '.'))
 			{
 				if (verbose)
 					printf("%s %s\n", _("Calling gunzip for"), location);
@@ -409,7 +408,7 @@ handlemanual(char *name)
 					line[0] = '\0';
 
 				/* macro starts with a dot*/
-				if (line[0] != '.' ||(strlen(line)) <(size_t) 2)
+				if (line[0] != '.' || strlen(line) < (size_t)2)
 				{
 					fprintf(id, "%s", line);
 					continue;
@@ -420,10 +419,10 @@ handlemanual(char *name)
 						macroline_size = strlen(ignored_entries[i]);
 						if (strlen(line + 1) < macroline_size)
 							macroline_size = strlen(line + 1);
-						if ((strncmp(ignored_entries[i], line + 1, macroline_size)) == 0
-								&&(*(line + 1 +(int) macroline_size) == ' '
-									|| *(line + 1 +(int) macroline_size) == '\n'
-									|| *(line + 1 +(int) macroline_size) == '\t'))
+						if (strncmp(ignored_entries[i], line + 1, macroline_size) == 0
+								&& (*(line + 1 + (int)macroline_size) == ' '
+									|| *(line + 1 + (int)macroline_size) == '\n'
+									|| *(line + 1 + (int)macroline_size) == '\t'))
 						{
 							if (quote_ignored)
 							{
@@ -514,7 +513,7 @@ handlemanual(char *name)
 		{
 			/* set MANWIDTH environment variable */
 			static char tmp[24];
-			snprintf(tmp, 24, "MANWIDTH=%d", maxx);
+			snprintf(tmp, 24, "MANWIDTH=%u", maxx);
 			putenv(tmp);
 			manwidthChanged = 1;
 		}
@@ -923,7 +922,7 @@ man_initializelinks(char *tmp, int carry)
 
 /* viewer function. Handles keyboard actions--main event loop */
 int
-manualwork()
+manualwork(void)
 {
 	/* for user's shell commands */
 	FILE *mypipe;
@@ -941,7 +940,7 @@ manualwork()
 	{
 		/* set MANWIDTH environment variable */
 		static char tmp[24];
-		snprintf(tmp, 24, "MANWIDTH=%d", maxx);
+		snprintf(tmp, 24, "MANWIDTH=%u", maxx);
 		putenv(tmp);
 		manwidthChanged = 1;
 	}
@@ -1585,7 +1584,7 @@ skip_search:
 
 void
 /* scan for some hyperlink, available on current screen */
-rescan_selected()
+rescan_selected(void)
 {
 	for (unsigned i = 0; i < ManualLinks; i++)
 	{
@@ -1613,7 +1612,7 @@ char *getmancolumn(char *man, int mancol)
 
 /* show the currently visible part of manpage */
 void
-showmanualscreen()
+showmanualscreen(void)
 {
 #ifdef getmaxyx
 	/* refresh maxy, maxx values */
@@ -1760,7 +1759,7 @@ label_skip_other:;
 
 /* add hyperobject highlights */
 void
-add_highlights()
+add_highlights(void)
 {
 	int i;
 	/* scan through the visible objects */

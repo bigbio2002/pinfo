@@ -652,7 +652,7 @@ addinfosuffix(char *info)
  * be used for breaking the system's security.
  */
 void
-checksu()
+checksu(void)
 {
 	struct passwd *pswd;
 	struct group *grwd;

@@ -32,7 +32,7 @@
 #define INFO_TAG 0x1f
 #define INDIRECT_TAG 0x7f
 
-void initpaths ();
+void initpaths (void);
 void addrawpath (char *filename);
 
 /*  seek to a node in certain info file */
@@ -69,7 +69,7 @@ FILE *opendirfile (int number);
 /* creates tag table for info file */
 void create_tag_table (FILE * id);
 /* creates tag table for indirect info */
-void create_indirect_tag_table ();
+void create_indirect_tag_table (void);
 
 /*
  * look up a name, which was specified by the user in cmd line, in dir

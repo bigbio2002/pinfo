@@ -869,7 +869,7 @@ openinfo(char *filename, int number)
 #undef BUF_LEN
 }
 
-	void
+void
 addrawpath(char *filename)
 {
 	int len = strlen(filename);
@@ -902,7 +902,7 @@ addrawpath(char *filename)
 		filename[pos] = tmp;
 }
 
-	int
+int
 isininfopath(char *name)
 {
 	int i;
@@ -936,7 +936,7 @@ charcount(const char *str, const char ch)
  * and put them in the global var infopaths[]
  */
 void
-initpaths()
+initpaths(void)
 {
 	char emptystr[1] = "";
 	char **paths = NULL;
@@ -1125,7 +1125,7 @@ initpaths()
 
 
 void
-create_indirect_tag_table()
+create_indirect_tag_table(void)
 {
 	FILE *id = NULL;
 	int initial;

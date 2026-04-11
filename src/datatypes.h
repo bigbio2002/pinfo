@@ -194,13 +194,13 @@ extern int DontHandleWithoutTagTable;
 
 
 /* initialize history (see struct above) * variables for `lastread' history */
-void inithistory ();
+void inithistory (void);
 /* adds a history entry to the info file `lastread' history */
 void addinfohistory (char *file, char *node, int cursor, int menu, int pos);
 /* deletes last history entry */
-void dellastinfohistory ();
+void dellastinfohistory (void);
 
 /* clears the default searchpath for openinfo() */
-void clearfilenameprefix ();
+void clearfilenameprefix (void);
 
 #endif

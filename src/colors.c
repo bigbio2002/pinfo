@@ -43,7 +43,7 @@ int infohighlight;
 int searchhighlight;
 
 void
-initcolors()
+initcolors(void)
 {
 #ifdef HAVE_CURSES_COLOR
 	if (has_colors())

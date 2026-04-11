@@ -40,6 +40,6 @@ void getprevnode (char *type, char *node);
 void getupnode (char *type, char *node);
 /* reads the nodename from top line */
 void getnodename (char *type, char *node);
-void freeindirect ();
-void freetagtable ();
+void freeindirect (void);
+void freetagtable (void);
 #endif

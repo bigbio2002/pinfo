@@ -70,7 +70,7 @@ handle_resume(int UNUSED(signum))
 }
 
 void
-signal_handler()
+signal_handler(void)
 {
 	sigset_t sigs;
 

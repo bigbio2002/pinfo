@@ -30,15 +30,15 @@ int ishyphen(unsigned char ch);
 /* load manual */
 void loadmanual(FILE * id);
 /* handle keyboard */
-int manualwork();
+int manualwork(void);
 /* scan for potential link to select on viewed manual page */
-void rescan_selected();
+void rescan_selected(void);
 /* self explanatory */
-void showmanualscreen();
+void showmanualscreen(void);
 /* mvaddstr with bold/italic */
 void mvaddstr_manual(int y, int x, char *str);
 /* adds highlights to a painted screen */
-void add_highlights();
+void add_highlights(void);
 /* strips line from formatting characters */
 void strip_manual(char *buf);
 /*
