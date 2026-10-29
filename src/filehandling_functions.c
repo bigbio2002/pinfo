@@ -101,8 +101,8 @@ matchfile(char **buf, char *name)
 		 * malloc errors */
 		char *filename = xmalloc(strlen(dp->d_name)+1);
 		char *pagename = xmalloc(strlen(dp->d_name)+1);
-		strcat(filename, dp->d_name);
-		strcat(pagename, dp->d_name);
+		strcpy(filename, dp->d_name);
+		strcpy(pagename, dp->d_name);
 
 		/* strip suffixes (so "gcc.info.gz" -> "gcc") */
 		strip_compression_suffix(pagename);
@@ -382,8 +382,6 @@ load_tag_table(char **message, unsigned long lines)
 {
 	char *wsk, *wsk1;
 	int is_indirect = 0;
-	register unsigned int j;
-	register char *res;
 	int cut = 0;			/* holds the number of corrupt lines */
 
 	/*
@@ -416,16 +414,15 @@ load_tag_table(char **message, unsigned long lines)
 		}
 		if (wsk1 < check)
 		{
-			(*wsk1) = 0;
-			/*
-			 * original: sprintf(tag_table[i-cut].nodename,"%s",wsk);
-			 * below is a faster version.
-			 */
-			res = memcpy(tag_table[i - cut].nodename, wsk, j =(size_t)(wsk1 - wsk));
-			(*(res += j + 1)) = 0;
-			(*wsk1) = INDIRECT_TAG;
-			wsk1++;
-			tag_table[i - cut].offset = atoi(wsk1);
+			size_t nodename_len = (size_t)(wsk1 - wsk);
+			if (nodename_len < sizeof(tag_table[i - cut].nodename))
+			{
+				memcpy(tag_table[i - cut].nodename, wsk, nodename_len);
+				tag_table[i - cut].nodename[nodename_len] = '\0';
+				tag_table[i - cut].offset = atoi(wsk1 + 1);
+			}
+			else
+				cut++;
 		}
 		else
 			cut++;			/* increment the number of corrupt entries */
@@ -1324,4 +1321,3 @@ strip_info_suffix(char *file)
 		}
 	}
 }
-
