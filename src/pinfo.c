@@ -422,7 +422,7 @@ main(int argc, char *argv[])
 			 * loop thing is rewritten.
 			 */
 			if ( (ForceManualTagTable==0)
-				 && (check_node_name(work_return_value.node, type) == 0 ))
+				 && (check_node_name(tag_table[tag_table_pos].nodename, type) == 0 ))
 			{
 				/* Oops, we found the wrong node! */
 
