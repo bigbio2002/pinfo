@@ -944,7 +944,7 @@ initpaths(void)
 	unsigned int i, j, maxpaths, numpaths = 0, infolen, langlen;
 	size_t len;
 	struct stat sbuf;
-	ino_t *inodes;
+	struct stat *pathstats;
 
 	/* first concat the paths */
 	env = getenv("INFOPATH");
@@ -1045,7 +1045,7 @@ initpaths(void)
 	/* ok, now we have all the (possibly) revelevant paths in paths[] */
 	/* now loop over them, see if they are valid and if they are duplicates*/
 	/* TODO: cleanup all malloc calls (get rid of cast, use sizeof(varname) instead of sizeof(type) */
-	inodes = (ino_t *) xmalloc( maxpaths * sizeof(ino_t) );
+	pathstats = (struct stat *) xmalloc( maxpaths * sizeof(struct stat) );
 	numpaths = 0;
 	len = 0;
 	for (i=0; i< maxpaths; i++)
@@ -1064,17 +1064,19 @@ initpaths(void)
 					paths[i], strerror(errno) );
 #endif
 			paths[i] = NULL;
-			inodes[i] = 0;
 		}
 		else
 		{
-			inodes[i] = sbuf.st_ino;
+			pathstats[i] = sbuf;
 		}
 
 		/* now check if this path is a duplicate */
-		for (j=0; j<i; j++)
+		for (j=0; paths[i] != NULL && j<i; j++)
 		{
-			if (inodes[j]==inodes[i]) paths[i] = NULL;
+			if (paths[j] != NULL
+					&& pathstats[j].st_dev == sbuf.st_dev
+					&& pathstats[j].st_ino == sbuf.st_ino)
+				paths[i] = NULL;
 		}
 
 		/* calculate the total number of vali paths and the size of teh strings */
@@ -1108,7 +1110,7 @@ initpaths(void)
 	xfree(paths);
 	xfree(lang);
 	xfree(langshort);
-	xfree(inodes);
+	xfree(pathstats);
 
 #ifdef ___DEBUG___
 	/* for debugging */
