@@ -954,7 +954,7 @@ initpaths(void)
 	}
 	infolen = strlen(env) + strlen(configuredinfopath) + 3;
 	infopath = (char *) xmalloc( infolen );
-	strcat(infopath, env);
+	strcpy(infopath, env);
 	strcat(infopath, ":");
 	strcat(infopath, configuredinfopath);
 	/* end with a :, otherwise the strchr below will fail for the last entry */
@@ -963,6 +963,7 @@ initpaths(void)
 	/* alloc the paths[] array */
 	maxpaths = 3 * (charcount( infopath, ':' ) + 1); // *3 for $LANG
 	paths = (char **) xmalloc( maxpaths * sizeof(char *) );
+	memset(paths, 0, maxpaths * sizeof(char *));
 
 	/* split at ':' and put the path components into paths[] */
 	dir = infopath;
